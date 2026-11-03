@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>Growth Audit — Ahead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: only light;
+  /* ---- Ahead, extracted from their live screens (dark is their native look) ---- */
+  --ah-bg:#1E1D29; --ah-card:#232230; --ah-line:#2F2E3E; --ah-track:#353440; --ah-mute:#6A678B;
+  --ah-ink:#FFFFFF; --ah-txt:#D9D7E6; --ah-sub:#A9A6BE;
+  --ah-pri:#7A5FEC; --ah-pri-soft:#EAE7FB; --ah-dis:#D7CFF9;
+  --ah-pay:#392A89; --ah-pay-card:#453A8A; --ah-pay-sel:#4F4680; --ah-pay-line:#8F76F3; --ah-tl:#8C75F2; --ah-tl2:#56479A;
+  --ah-hill:#C5B9F7; --ah-green:#2FB36B; --ah-red:#FD554A;
+  --r-ctl:10px; --r-media:16px;
+  /* ---- the report shell, in Ahead's own palette ---- */
+  --bg:#1E1D29; --bg2:#232230; --surf:#262534;
+  --hair:rgba(255,255,255,.08); --hair2:rgba(255,255,255,.16);
+  --ink:#FFFFFF; --ink2:#C9C6DA; --ink3:#8D8AA6;
+  --accent:#7A5FEC; --accent-lift:#A994FF;
+  --panel:#FFFFFF; --panel-ink:#15141F; --panel-muted:#625F78; --panel-line:#ECEAF3;
+  --accent-ink:#5B3FD6;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+@media(max-width:700px){.wrap{padding:0 20px}}
+
+/* ============ top bar ============ */
+.nav{position:sticky;top:0;z-index:70;background:rgba(30,29,41,.86);backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid var(--hair)}
+.nav-in{max-width:1080px;margin:0 auto;padding:0 32px;height:58px;display:flex;align-items:center;gap:18px}
+@media(max-width:700px){.nav-in{padding:0 20px;gap:12px}}
+.nav-brand{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+.nav-brand img{height:20px;width:auto;display:block}
+.nav-brand .sep{width:1px;height:18px;background:var(--hair2)}
+.nav-brand span{color:var(--ink2);font-weight:500}
+.nav-brand b{color:var(--ink);font-weight:600;white-space:nowrap}
+.nav-links{margin-left:auto;display:flex;gap:2px;align-items:center}
+.nav-links button{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink3);transition:.16s}
+.nav-links button:hover{color:var(--ink)}
+.nav-links button.on{color:var(--ink);background:rgba(255,255,255,.08)}
+@media(max-width:640px){.nav-brand span{display:none}}
+@media(max-width:420px){.nav-brand b,.nav-brand .sep{display:none}}
+
+.view{display:none}
+.view.on{display:block}
+
+/* ============ hero ============ */
+.hero{padding:104px 0 0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-340px;left:50%;transform:translateX(-50%);
+  width:1100px;height:640px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(122,95,236,.34),transparent 72%)}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(40% 50% at 8% 20%,rgba(57,42,137,.55),transparent 70%),
+   radial-gradient(38% 45% at 92% 18%,rgba(197,185,247,.10),transparent 70%)}
+.hero>*{position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lift);margin-bottom:26px}
+.hero h1{font-size:76px;line-height:.98;font-weight:700;letter-spacing:-.045em;margin:0 0 24px}
+@media(max-width:820px){.hero h1{font-size:50px}.hero{padding-top:70px}}
+.hero .lede{font-size:20px;line-height:1.5;font-weight:400;color:var(--ink2);max-width:600px;margin:0 auto;letter-spacing:-.012em}
+@media(max-width:820px){.hero .lede{font-size:17px}}
+.hero .meta{margin-top:30px;font-size:12.5px;color:var(--ink3);letter-spacing:.02em}
+.hero .meta b{color:var(--ink2);font-weight:600}
+
+.stats{display:flex;justify-content:center;gap:0;margin:70px auto 0;max-width:760px;
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.stat{flex:1;padding:26px 14px;text-align:center;border-left:1px solid var(--hair)}
+.stat:first-child{border-left:none}
+.stat b{display:block;font-size:26px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.stat span{display:block;font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.35}
+@media(max-width:700px){.stat b{font-size:19px}.stat{padding:18px 8px}}
+
+.fb{max-width:760px;margin:0 auto;padding:30px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:26px;text-align:left}
+@media(max-width:700px){.fb{grid-template-columns:1fr;gap:20px;padding-top:24px}}
+.fb-k{grid-column:1/-1;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink3);text-align:center;margin-bottom:-6px}
+.fb-i{display:flex;gap:12px;align-items:flex-start}
+.fb-i .tick{width:18px;height:18px;flex:none;margin-top:3px;border-radius:50%;background:rgba(122,95,236,.24);
+  display:grid;place-items:center}
+.fb-i .tick svg{width:10px;height:10px;stroke:var(--accent-lift);stroke-width:3;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.fb-i p{font-size:14px;line-height:1.55;color:var(--ink2);margin:0}
+.fb-i p b{color:var(--ink);font-weight:700}
+
+.sec{padding:96px 0}
+.sec-k{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px}
+.sec h2{font-size:38px;line-height:1.14;font-weight:700;letter-spacing:-.035em;margin:0 0 20px;max-width:680px}
+@media(max-width:820px){.sec h2{font-size:29px}.sec{padding:64px 0}}
+.sec p.body{font-size:17px;line-height:1.66;color:var(--ink2);max-width:640px;margin:0 0 18px;letter-spacing:-.008em}
+.sec p.body b{color:var(--ink);font-weight:600}
+.rule{height:1px;background:var(--hair);margin:0}
+
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;max-width:820px}
+@media(max-width:760px){.notes{grid-template-columns:1fr}}
+.note{background:var(--surf);border:1px solid var(--hair);border-radius:16px;padding:24px 26px}
+.note h4{font-size:15px;font-weight:700;letter-spacing:-.015em;margin:0 0 8px}
+.note p{font-size:14px;line-height:1.6;color:var(--ink2);margin:0}
+
+.ideas{display:flex;flex-direction:column;gap:0;margin-top:14px;border-top:1px solid var(--hair)}
+.idea{display:grid;grid-template-columns:52px 1fr 180px;gap:26px;align-items:start;
+  padding:30px 4px;border-bottom:1px solid var(--hair);text-align:left;width:100%;transition:.18s}
+.idea:hover{background:rgba(255,255,255,.03)}
+@media(max-width:780px){.idea{grid-template-columns:38px 1fr;gap:16px}}
+.idea .no{font-size:13px;font-weight:700;color:var(--ink3);padding-top:4px;letter-spacing:.02em}
+.idea h3{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.024em;margin:0 0 7px}
+@media(max-width:820px){.idea h3{font-size:18px}}
+.idea p{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;max-width:540px}
+.idea .out{text-align:right;padding-top:3px}
+@media(max-width:780px){.idea .out{grid-column:2;text-align:left;padding-top:12px}}
+.idea .out b{display:block;font-size:19px;font-weight:700;letter-spacing:-.025em;color:var(--accent-lift);white-space:nowrap}
+.idea .out span{display:block;font-size:10.5px;color:var(--ink3);margin-top:3px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.idea .seeit{display:inline-flex;align-items:center;gap:5px;margin-top:11px;font-size:12.5px;
+  font-weight:600;color:var(--accent-lift)}
+.idea .seeit svg{width:12px;height:12px}
+
+.band{background:var(--surf);border:1px solid var(--hair);border-radius:28px;padding:40px 44px;margin-top:44px;
+  display:flex;align-items:center;gap:36px;flex-wrap:wrap}
+@media(max-width:700px){.band{padding:28px 24px;gap:22px}}
+.band .lab{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.band .txt{flex:1;min-width:240px}
+.band .txt p{font-size:15.5px;line-height:1.6;color:var(--ink2);margin:0}
+.band .nums{display:flex;gap:34px}
+.band .nums div b{display:block;font-size:30px;font-weight:700;letter-spacing:-.035em;color:var(--accent-lift)}
+.band .nums div span{display:block;font-size:11px;color:var(--ink3);margin-top:2px;letter-spacing:.04em;
+  text-transform:uppercase;font-weight:600}
+
+.cta-row{display:flex;justify-content:center;margin-top:52px;align-items:center;gap:22px;flex-wrap:wrap}
+.bigbtn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;
+  font-size:15px;font-weight:700;letter-spacing:-.01em;padding:15px 26px;border-radius:30px;transition:.16s}
+.bigbtn:hover{filter:brightness(1.1)}
+.bigbtn svg{width:15px;height:15px}
+
+.foot{border-top:1px solid var(--hair);padding:36px 0 70px;font-size:12.5px;line-height:1.6;color:var(--ink3)}
+
+/* ============ prototype stage ============ */
+.stage{display:grid;grid-template-columns:minmax(440px,1fr) minmax(400px,470px);gap:0;
+  align-items:start;min-height:calc(100vh - 58px)}
+@media(max-width:1080px){.stage{grid-template-columns:1fr}}
+.phonecol{padding:34px 24px 46px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.panelcol{border-left:1px solid var(--hair);background:var(--panel);color:var(--panel-ink);
+  min-height:calc(100vh - 58px);position:sticky;top:58px;max-height:calc(100vh - 58px);overflow-y:auto}
+@media(max-width:1080px){.panelcol{position:static;max-height:none;border-left:none;border-top:1px solid var(--hair)}}
+
+.phone{position:relative;width:390px;height:844px;flex:none;background:#000;border:11px solid #000;
+  border-radius:46px;box-shadow:0 0 0 1.5px #3A3948,0 34px 70px -22px rgba(0,0,0,.7)}
+.phone-in{position:absolute;inset:0;border-radius:36px;overflow:hidden;background:var(--ah-bg);color-scheme:only light}
+.island{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:104px;height:30px;background:#000;
+  border-radius:16px;z-index:60;pointer-events:none}
+.sbar{position:absolute;top:0;left:0;right:0;height:50px;z-index:55;pointer-events:none;display:flex;
+  align-items:center;justify-content:space-between;padding:14px 28px 0 34px;font:700 15px/1 'Figtree',sans-serif;color:#111;transition:color .3s}
+.sbar.light{color:#fff}
+.sbar .glyphs{display:flex;gap:5px;align-items:center}
+.homebar{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:134px;height:5px;
+  border-radius:3px;background:#111;z-index:56;pointer-events:none;transition:background .3s}
+.homebar.light{background:rgba(255,255,255,.9)}
+.screenwrap{position:absolute;inset:0;overflow:hidden;background:var(--ah-bg)}
+
+/* ============ phone screens — Ahead's system, all prefixed scr-/ah- ============ */
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--ah-bg);color:var(--ah-ink);
+  font-family:'Figtree',-apple-system,sans-serif;
+  transform:translateX(100%);transition:transform .36s cubic-bezier(.32,.72,0,1);z-index:10;will-change:transform}
+.scr.is-active{transform:translateX(0);z-index:20}
+.scr.is-past{transform:translateX(-24%)}
+.scr.sheet{transform:translateY(105%)}
+.scr.sheet.is-active{transform:translateY(0);z-index:30}
+.scr.nofx{transition:none}
+.scr-top{flex:none;padding:54px 20px 0;position:relative;z-index:2}
+.scr-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0 20px;scrollbar-width:none;position:relative;z-index:2}
+.scr-body::-webkit-scrollbar{display:none}
+.scr-body.dock{display:flex;flex-direction:column}
+.scr-foot{flex:none;padding:12px 20px 30px;position:relative;z-index:2}
+
+/* header: full-width progress, then back + counter */
+.ah-prog{height:4px;border-radius:2px;background:var(--ah-track);overflow:hidden;margin-top:6px}
+.ah-prog i{display:block;height:100%;background:var(--ah-pri);border-radius:2px;transition:width .4s cubic-bezier(.32,.72,0,1)}
+.ah-nav{display:flex;align-items:center;height:40px;margin-top:8px;position:relative}
+.ah-back{width:32px;height:32px;margin-left:-6px;display:grid;place-items:center;color:var(--ah-sub)}
+.ah-back svg{width:18px;height:18px}
+.ah-count{position:absolute;left:0;right:0;text-align:center;font-size:12.5px;font-weight:500;color:var(--ah-txt);pointer-events:none}
+.ah-h{font-size:19.5px;line-height:1.36;font-weight:600;letter-spacing:-.005em;margin:14px 0 0;color:var(--ah-ink)}
+.ah-h.c{text-align:center}
+.ah-sub{font-size:13.5px;line-height:1.45;color:var(--ah-sub);margin:6px 0 0}
+
+/* buttons */
+.ah-btn{display:block;width:100%;height:50px;border-radius:var(--r-ctl);background:var(--ah-pri);color:#fff;
+  font:600 15px/1 'Figtree',sans-serif;transition:filter .15s}
+.ah-btn:hover{filter:brightness(1.07)}
+.ah-btn[disabled]{background:var(--ah-dis);cursor:default;filter:none}
+.ah-btn.soft{background:var(--ah-pri-soft);color:#2A2550;margin-top:10px}
+.ah-btn.white{background:#fff;color:#1E1D29;font-weight:600;font-size:17px;height:52px}
+.ah-fab{width:46px;height:46px;border-radius:50%;background:var(--ah-pri);color:#fff;display:grid;place-items:center;margin-left:auto;
+  box-shadow:0 6px 18px -6px rgba(122,95,236,.8)}
+.ah-fab svg{width:20px;height:20px}
+.ah-fab[disabled]{opacity:.45;cursor:default}
+.ah-legal{font-size:11px;line-height:1.5;color:var(--ah-sub);text-align:center;margin-top:16px}
+.ah-legal u{color:var(--ah-txt)}
+
+/* splash */
+.ah-rocket{display:block;width:290px;margin:0 auto}
+.ah-word{display:block;height:27px;margin:8px auto 0}
+.ah-tag{font-size:17px;line-height:1.45;color:var(--ah-txt);text-align:center;margin:14px 20px 0}
+
+/* option rows */
+.ah-rows{display:flex;flex-direction:column;gap:9px;margin-top:22px}
+.ah-row{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:var(--ah-card);border:1.5px solid transparent;
+  border-radius:var(--r-ctl);padding:12px 14px;font:500 13.5px/1.3 'Figtree',sans-serif;color:var(--ah-ink);transition:.14s}
+.ah-row .e{font-size:15px;width:18px;text-align:center}
+.ah-row.on{border-color:var(--ah-pri)}
+
+/* question with the ghost + bubble, and their bar slider */
+.ah-ask{display:flex;align-items:center;gap:10px;margin-top:62px}
+.ah-ask img{width:62px;flex:none}
+.ah-bub{flex:1;background:var(--ah-card);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.4;color:var(--ah-ink)}
+.ah-bars{display:flex;justify-content:space-between;align-items:flex-end;height:118px;margin:46px 2px 0}
+.ah-bars i{width:7px;border-radius:4px;background:var(--ah-mute);transition:background .15s}
+.ah-bars i.on{background:var(--ah-pri)}
+.ah-range{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;margin-top:6px;cursor:pointer}
+.ah-range::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--ah-mute)}
+.ah-range::-moz-range-track{height:6px;border-radius:3px;background:var(--ah-mute)}
+.ah-range::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--ah-pri);border:4px solid #fff;margin-top:-12px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.ah-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--ah-pri);border:4px solid #fff}
+.ah-ends{display:flex;justify-content:space-between;gap:30px;font-size:12px;line-height:1.35;color:var(--ah-ink);margin-top:4px}
+.ah-ends span:last-child{text-align:right}
+
+/* daily time table */
+.ah-tbl{border:1px solid var(--ah-line);border-radius:6px;margin:24px 10px 0;overflow:hidden}
+.ah-tr{display:flex;justify-content:space-between;align-items:center;width:100%;height:38px;padding:0 12px;
+  border-top:1px solid var(--ah-line);font:600 13px/1 'Figtree',sans-serif;color:var(--ah-ink);transition:.14s}
+.ah-tr:first-child{border-top:none}
+.ah-tr span{font-weight:500;font-size:11.5px;color:var(--ah-txt)}
+.ah-tr.on{box-shadow:inset 0 0 0 1.5px var(--ah-pri);color:var(--ah-pri);border-radius:6px}
+.ah-tr.on span{color:var(--ah-pri)}
+.ah-hint{display:flex;align-items:center;gap:10px;margin:40px 0 0}
+.ah-hint img{width:70px;flex:none}
+.ah-hint .ah-bub{font-size:11.5px}
+
+/* loader */
+.ah-lwrap{display:flex;flex-direction:column;align-items:center;padding-top:110px}
+.ah-lwrap img{width:150px}
+.ah-load-h{font-size:19px;font-weight:600;margin:22px 0 32px;color:var(--ah-ink)}
+.ah-lrows{width:100%;display:flex;flex-direction:column;gap:22px}
+.ah-lr div{display:flex;justify-content:space-between;font-size:13px;font-weight:500;color:var(--ah-ink)}
+.ah-lr .tr{height:3px;border-radius:2px;background:var(--ah-track);margin-top:8px;overflow:hidden}
+.ah-lr .tr i{display:block;height:100%;width:0;background:var(--ah-pri)}
+
+/* profile */
+.ah-radar{display:block;width:100%;height:auto;margin-top:2px}
+.ah-radar text{font:500 10.5px 'Figtree',sans-serif;fill:var(--ah-ink)}
+.ah-radar .ring{fill:none;stroke:var(--ah-ink);stroke-opacity:.75;stroke-width:1}
+.ah-radar .spoke{stroke:var(--ah-ink);stroke-opacity:.35;stroke-width:1}
+.ah-hl{display:flex;align-items:center;gap:12px;margin-top:4px}
+.ah-hl img{width:52px}
+.ah-hl .ah-bub{flex:none;background:#fff;color:#1E1D29;font-size:13px}
+.ah-card{background:var(--ah-card);border-radius:8px;padding:12px 14px;margin-top:10px}
+.ah-card .k{display:flex;justify-content:space-between;align-items:center;font-size:12.5px}
+.ah-card .k em{font-style:normal;color:var(--ah-pri);font-weight:600}
+.ah-card .k b{font-weight:600;display:flex;align-items:center;gap:6px;color:var(--ah-ink)}
+.ah-card .k i{font-style:normal;font-size:10.5px;color:#fff;border-radius:3px;padding:2px 4px;background:var(--ah-green)}
+.ah-card .k i.r{background:var(--ah-red)}
+.ah-card p{font-size:12.5px;line-height:1.45;color:var(--ah-txt);margin-top:7px}
+
+/* journeys */
+.ah-slots{display:flex;justify-content:center;gap:24px;margin-top:20px}
+.ah-slot{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11.5px;color:var(--ah-txt)}
+.ah-slot div{width:44px;height:44px;border-radius:8px;border:1px solid var(--ah-line);display:grid;place-items:center;color:var(--ah-mute);overflow:hidden;background:var(--ah-card)}
+.ah-slot div img{width:100%;height:100%;object-fit:cover}
+.ah-jgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.ah-j{border-radius:8px;overflow:hidden;text-align:center;padding-bottom:8px;color:#1E1D29}
+.ah-j img{display:block;width:100%;height:auto}
+.ah-j b{display:block;font-size:13px;font-weight:600;margin-top:2px}
+.ah-j span{display:block;font-size:9px;line-height:1.35;color:#4a4766}
+.ah-j button{display:block;width:calc(100% - 16px);margin:6px auto 0;height:28px;border-radius:5px;background:var(--ah-pri);color:#fff;font:600 13px/1 'Figtree',sans-serif}
+.ah-j.on button{background:#fff;color:var(--ah-pri)}
+
+/* paywall — their purple */
+.scr--pay,.scr--rem{background:var(--ah-pay)}
+.scr--pay .scr-top{display:flex;justify-content:space-between;align-items:center;padding-top:52px}
+.ah-x{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:rgba(255,255,255,.75);background:rgba(255,255,255,.1)}
+.ah-x svg{width:16px;height:16px}
+.scr--pay .ah-back{color:rgba(255,255,255,.8)}
+.ah-peek{display:block;width:118px;margin:-30px auto 0}
+.ah-payh{font-size:21px;line-height:1.25;font-weight:600;text-align:center;color:#fff;margin:6px 10px 0}
+.ah-paysub{font-size:13px;color:#D4CCFA;text-align:center;margin-top:5px}
+.ah-paysub b{color:#fff;font-weight:600}
+.ah-ada{display:block;width:216px;margin:10px auto 0}
+.ah-seventy{font-size:11.5px;line-height:1.4;color:#E4DEFF;text-align:center;margin:6px 12px 0}
+.ah-seventy b{color:#fff}
+.ah-tl{margin:14px 8px 0;display:flex;flex-direction:column;position:relative}
+.ah-tl::before{content:'';position:absolute;left:16px;top:20px;bottom:20px;width:6px;margin-left:-3px;background:var(--ah-tl2);border-radius:3px}
+.ah-st{display:flex;gap:14px;align-items:flex-start;position:relative;padding:3px 0}
+.ah-st .ic{width:32px;height:32px;flex:none;border-radius:50%;background:var(--ah-tl2);display:grid;place-items:center;color:#fff}
+.ah-st:first-child .ic{background:var(--ah-tl);box-shadow:0 0 0 5px rgba(140,117,242,.35)}
+.ah-st .ic svg{width:15px;height:15px}
+.ah-st b{display:block;font-size:14px;font-weight:600;color:#fff;line-height:1.3;margin-top:2px}
+.ah-st span{display:block;font-size:11.5px;line-height:1.35;color:#CFC6F7;margin-top:1px}
+.ah-trials{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.ah-trial{position:relative;height:66px;border-radius:14px;background:var(--ah-pay-card);border:2px solid transparent;color:#fff;transition:.14s}
+.ah-trial b{display:block;font-size:15px;font-weight:500}
+.ah-trial span{display:block;font-size:13px;color:#CFC6F7;margin-top:4px}
+.ah-trial.on{background:var(--ah-pay-sel);border-color:var(--ah-pay-line)}
+.ah-trial .tk{position:absolute;top:-9px;right:-7px;width:22px;height:22px;border-radius:50%;background:var(--ah-tl);border:2px solid var(--ah-pay);display:none;place-items:center}
+.ah-trial.on .tk{display:grid}
+.ah-trial .tk svg{width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.scr--pay .scr-foot{padding:8px 20px 26px}
+.ah-allp{display:block;width:100%;font-size:13px;font-weight:500;color:#fff;text-align:center;margin-bottom:9px}
+.ah-fine{font-size:10.5px;line-height:1.4;color:#fff;text-align:center;margin-top:8px}
+.ah-rest{display:flex;justify-content:center;align-items:center;gap:6px;font-size:11.5px;color:#CFC6F7;margin-top:6px}
+.ah-rest svg{width:13px;height:13px}
+
+/* offer — their white plan sheet */
+.scr--offer{top:58px;border-radius:26px 26px 0 0;background:#fff;color:#1E1D29;box-shadow:0 0 0 999px rgba(14,10,40,0)}
+.scr--offer.is-active{box-shadow:0 0 0 999px rgba(14,10,40,.55);transition:transform .36s cubic-bezier(.32,.72,0,1),box-shadow .3s .1s}
+.scr--offer .scr-top{padding-top:16px;text-align:center}
+.scr--offer .ah-x{position:absolute;right:16px;top:14px;background:#F1EFF8;color:#5E5A78}
+.ah-oh{font-size:22px;line-height:1.25;font-weight:600;margin:30px 18px 0;color:#1E1D29}
+.ah-os{font-size:13.5px;color:#5E5A78;margin-top:8px}
+.ah-cmp{margin-top:22px;display:grid;grid-template-columns:1.05fr 1fr 1fr;border-radius:14px;overflow:visible;font-size:12.5px;position:relative}
+.ah-cmp > div{padding:10px 8px;border-top:1px solid #ECEAF3;display:flex;align-items:center;line-height:1.3}
+.ah-cmp .h{border-top:none;font-weight:600;font-size:13.5px;justify-content:center;padding-top:20px}
+.ah-cmp .l{color:#5E5A78;font-weight:500}
+.ah-cmp .v{justify-content:center;text-align:center;color:#1E1D29}
+.ah-cmp .lt{background:#F4F1FF;font-weight:600}
+.ah-cmp .lt.h{border-radius:12px 12px 0 0;position:relative}
+.ah-cmp .lt.end{border-radius:0 0 12px 12px}
+.ah-lifeframe{position:absolute;top:0;bottom:0;right:0;width:32.3%;border:2px solid #8F76F3;border-radius:12px;pointer-events:none}
+
+.ah-mp{position:absolute;top:-10px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#8F76F3;color:#fff;font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 7px;border-radius:5px}
+.ah-ck{width:16px;height:16px;stroke:#2FB36B;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ah-save{display:inline-block;margin-top:16px;background:var(--ah-green);color:#fff;border-radius:6px;padding:5px 9px;font-size:12.5px;font-weight:600}
+.scr--offer .ah-fine{color:#5E5A78}
+.scr--offer .ah-rest{color:#5E5A78}
+
+/* sign-up sheet */
+.scr--acct .ah-rocket{width:250px;margin-top:10px;opacity:.5}
+.ah-sheet{background:#262533;border-radius:16px 16px 0 0;padding:20px 20px 30px;margin:0 -0px}
+.ah-sheet h3{font-size:15px;font-weight:600;text-align:center;color:var(--ah-ink)}
+.ah-sheet p{font-size:12.5px;color:var(--ah-sub);text-align:center;margin-top:4px}
+.ah-sso{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:42px;border-radius:6px;background:#2D2C3A;margin-top:10px;font:600 14px/1 'Figtree',sans-serif;color:var(--ah-ink)}
+.ah-sso svg{width:16px;height:16px}
+.ah-sso.plain{background:none}
+.scr--acct .scr-foot{padding:0}
+
+/* reminders, after purchase */
+.scr--rem .ah-h{color:#fff;font-size:20px;text-align:center;margin-top:24px}
+.scr--rem .ah-sub{color:#D4CCFA;text-align:center}
+.ah-hill{margin:auto -20px 0;display:block;width:calc(100% + 40px)}
+.scr--rem .scr-foot{background:var(--ah-hill);color:#1E1D29;text-align:center}
+.scr--rem .scr-foot p{font-size:12.5px;margin-bottom:14px;font-weight:500}
+.ah-not{display:block;width:100%;height:40px;font:500 14px/1 'Figtree',sans-serif;color:#1E1D29;margin-top:4px}
+
+/* light mode — an approximation: Ahead ships dark; no light frames exist */
+.phone-in.light{--ah-bg:#F5F3FD;--ah-card:#FFFFFF;--ah-line:#E4E0F3;--ah-track:#E2DEF2;--ah-mute:#BDB7DA;
+  --ah-ink:#1E1D29;--ah-txt:#3A3850;--ah-sub:#6A678B;background:var(--ah-bg)}
+.phone-in.light .screenwrap{background:var(--ah-bg)}
+.phone-in.light .ah-row,.phone-in.light .ah-bub,.phone-in.light .ah-card{box-shadow:0 2px 10px rgba(40,30,110,.06)}
+.phone-in.light .ah-hl .ah-bub{background:#fff}
+.phone-in.light .ah-sheet{background:#fff;box-shadow:0 -6px 24px rgba(40,30,110,.08)}
+.phone-in.light .ah-sso{background:#F1EFF8}
+.phone-in.light .ah-sso.plain{background:none}
+.phone-in.light .scr--acct .ah-rocket{opacity:.7}
+.phone-in.light .ah-btn[disabled]{background:#DCD5FA}
+
+/* prototype toolbar, walkthrough, QR */
+.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:520px}
+.seg{display:inline-flex;align-items:center;background:#2A2938;border:1px solid #3A3948;border-radius:20px;padding:3px;gap:2px}
+.seg button{padding:6px 11px;border-radius:16px;font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:var(--ink2);transition:.14s}
+.seg button.on{background:#fff;color:#1E1D29}
+.demo-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:20px;background:var(--accent);color:#fff;
+  font:700 12px/1 'Plus Jakarta Sans',sans-serif}
+.demo-cap{width:390px;max-width:calc(100vw - 24px);background:#fff;border:1px solid var(--hair);border-radius:16px;padding:14px 14px 12px;
+  display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.3)}
+.demo-cap .bar{position:absolute;left:0;top:0;right:0;height:3px;background:#EEEDF3}
+.demo-cap .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s linear}
+.demo-cap p{flex:1;font-size:13.5px;line-height:1.45;color:#15141F;margin:0;font-weight:500}
+.demo-cap button{font:700 12px/1 'Plus Jakarta Sans',sans-serif;color:#4A4760;padding:7px 10px;border-radius:12px;border:1px solid #E1DFEA;flex:none}
+.finger{position:absolute;z-index:90;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.28);
+  border:2px solid rgba(255,255,255,.95);box-shadow:0 4px 14px rgba(0,0,0,.35);pointer-events:none;opacity:0;left:50%;top:60%;
+  transition:left .32s cubic-bezier(.4,0,.2,1),top .32s cubic-bezier(.4,0,.2,1),opacity .2s,transform .15s}
+.finger.show{opacity:1}
+.finger.press{transform:scale(.78);background:rgba(255,255,255,.45)}
+.qr{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--hair);border-radius:16px;padding:10px 16px 10px 10px;text-align:left}
+.qr img{width:123px;height:123px;display:block;image-rendering:pixelated;border-radius:6px}
+.qr span{font-size:12.5px;line-height:1.45;color:#4A4760}
+.qr b{display:block;color:#15141F;font-size:13.5px}
+@media(max-width:1080px){.qr{display:none}}
+
+#view-proto .tools{order:0} #view-proto .demo-cap{order:1} #view-proto .phone{order:2} #view-proto .chips{order:3}
+#view-proto .chiphint{order:4} #view-proto .qr{order:5}
+.cta-row .qr{order:2}
+/* on a phone: the prototype is the screen */
+@media(max-width:500px){
+  #view-proto .phonecol{padding:0 0 28px;gap:14px}
+  #view-proto .phone{width:100vw;height:calc(100svh - 58px);min-height:640px;border:0;border-radius:0;box-shadow:none;order:1}
+  #view-proto .phone-in{border-radius:0}
+  #view-proto .island,#view-proto .sbar,#view-proto .homebar{display:none}
+  #view-proto .scr-top{padding-top:14px}
+  #view-proto .scr--pay .scr-top{padding-top:12px}
+  #view-proto .scr--offer{top:18px}
+  #view-proto .scr-foot{padding-bottom:18px}
+  #view-proto .tools{order:3;padding:0 12px}
+  #view-proto .demo-cap{position:fixed;left:12px;right:12px;bottom:12px;width:auto;max-width:none;z-index:95}
+  #view-proto .chips{order:4;padding:0 12px}
+  #view-proto .chiphint{order:5}
+}
+
+/* overview: walkthrough button */
+.herobtns{display:flex;justify-content:center;margin-top:30px}
+.ghostbtn{display:inline-flex;align-items:center;gap:10px;background:var(--surf);border:1px solid var(--hair2);color:var(--ink);font-size:14px;
+  font-weight:700;padding:9px 20px 9px 9px;border-radius:30px;transition:.16s}
+.ghostbtn:hover{border-color:rgba(255,255,255,.3)}
+.ghostbtn .pl{width:30px;height:30px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.ghostbtn .pl svg{width:12px;height:12px;fill:#fff;margin-left:2px}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:470px;margin:0 auto}
+.chip{padding:7px 13px;border-radius:20px;border:1px solid #3A3948;background:#2A2938;
+  font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:var(--ink2);transition:.14s}
+.chip:hover{color:var(--ink);border-color:#55536A}
+.chip.offer{border-style:dashed;border-color:var(--accent-lift);color:var(--accent-lift)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff;border-style:solid}
+.chiphint{text-align:center;font-size:11px;color:var(--ink3);margin:0;max-width:430px}
+
+/* ============ the short panel ============ */
+.pn{padding:30px 30px 60px}
+.pn-n{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.pn-n.ctx{color:var(--panel-muted)}
+.pn-t{font-size:23px;line-height:1.18;font-weight:700;letter-spacing:-.028em;margin:8px 0 0;color:var(--panel-ink)}
+.pn-hyp{font-size:15px;line-height:1.62;color:#2E2C3B;margin:16px 0 0}
+.pn-hyp b{font-weight:700;color:var(--panel-ink)}
+.pn-out{margin-top:22px;border-top:1px solid var(--panel-line);padding-top:18px}
+.pn-out .lab{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--panel-muted)}
+.pn-out .v{font-size:31px;font-weight:700;letter-spacing:-.035em;color:var(--accent-ink);margin-top:7px;line-height:1.05}
+.pn-kept{margin-top:22px;font-size:12.5px;line-height:1.55;color:var(--panel-muted)}
+.pn-kept b{color:#2E2C3B;font-weight:700}
+.pn-foot{font-size:11.5px;line-height:1.55;color:var(--panel-muted);border-top:1px solid var(--panel-line);
+  padding-top:14px;margin-top:26px}
+.pn-sep{height:1px;background:var(--panel-line);margin:26px 0}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-in">
+    <div class="nav-brand">
+      <img src="img/logo-white.svg" alt="ahead">
+      <i class="sep"></i>
+      <b>Growth Audit</b><span>· Ahead</span>
+    </div>
+    <div class="nav-links">
+      <button class="on" data-view="over">Overview</button>
+      <button data-view="proto">Prototype</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= OVERVIEW ======================= -->
+<div class="view on" id="view-over">
+
+<div class="hero">
+  <div class="wrap">
+    <!-- month + year = the day you build, not this file --><div class="eyebrow">Growth Audit · November 2026</div>
+    <h1>Ahead</h1>
+    <p class="lede">Five ideas to unlock more revenue from the traffic you already have.</p>
+    <div class="meta">Prepared by <b>Adapty</b> · based on your live iOS flow and your App Store listing</div>
+    <div class="herobtns"><button class="ghostbtn" data-demo><span class="pl"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>Watch the 30-second walkthrough</button></div>
+    <div class="stats">
+      <div class="stat"><b>30,000+</b><span>apps run subscriptions<br>on Adapty</span></div>
+      <div class="stat"><b>5</b><span>ideas, each rebuilt<br>as a working screen</span></div>
+      <div class="stat"><b>0</b><span>design changes<br>to your art direction</span></div>
+    </div>
+
+    <div class="fb">
+      <div class="fb-k">Built in Adapty Flow Builder</div>
+      <div class="fb-i">
+        <span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <p><b>Millions of dollars</b> in subscription revenue pass through Flow Builder every month.</p>
+      </div>
+      <div class="fb-i">
+        <span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <p><b>Nearly 500 apps</b> actively build their paywalls and onboarding in it — plenty of them past $100K MRR.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="wrap">
+    <div class="sec-k">What this is</div>
+    <h2>We opened Ahead the way a new user does, then rebuilt the parts we think are leaving money on the table.</h2>
+    <p class="body">Adapty powers subscriptions for <b>30,000+ apps</b>, so we get to see what actually moves conversion and ARPU across the market rather than inside one app. We pointed that at Ahead: installed it, went through all of onboarding up to the trial screen, read your App Store listing and your website, and looked for gaps between what you already have and what you show people at the moment they decide.</p>
+    <p class="body">What follows is five ideas — not fifteen. Each one is a hypothesis you can A/B test, and each one is built into a clickable prototype so you can see it rather than imagine it. <b>The prototype uses your design, not ours.</b></p>
+
+    <div class="notes">
+      <div class="note">
+        <h4>We did not redesign your app</h4>
+        <p>Every screen in the prototype is yours — your ghost, your bar slider, your radar profile, your journey cards, your purple trial screen. Only the order changed, plus a few things you already own but do not show at the right moment. This is not a design pitch.</p>
+      </div>
+      <div class="note">
+        <h4>You may have tested some of this</h4>
+        <p>We are working from the outside, so we cannot see your experiment history. If one of these is something you have already run, tell us — we will go deeper on the rest rather than repeat it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div class="sec">
+  <div class="wrap">
+    <div class="sec-k">The five ideas</div>
+    <h2>Ranked by what we would test first.</h2>
+    <p class="body">Each one links straight to the screen in the prototype.</p>
+
+    <div class="ideas">
+      <button class="idea" data-jump="paywall">
+        <span class="no">01</span>
+        <span>
+          <h3>Put their goal on the price screen</h3>
+          <p>“Become a better parent with Ahead!” already names the goal they picked, but it sits two screens before the price. The screen that asks for money says “Design your trial” to everyone. Bring the goal, their journey and their daily minutes onto it.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +15–20%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="welcome">
+        <span class="no">02</span>
+        <span>
+          <h3>Let them start before they sign up</h3>
+          <p>Tap Get started today and the next thing is a sheet asking for Google, Apple or email, before a single question. Let the questions come first, and ask for the account once they have paid and there is a profile worth saving.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +8%</b><b>ARPU +17%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="remind">
+        <span class="no">03</span>
+        <span>
+          <h3>Ask for reminders, Health and the widget after</h3>
+          <p>The Mantra widget, Apple Health and daily reminders are all asked for before anyone sees a price, and each one is a moment to stop. Ask after purchase, when there is a journey to be reminded about.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="paywall">
+        <span class="no">04</span>
+        <span>
+          <h3>Put your award and your 70% next to the price</h3>
+          <p>Your Apple Design Award, 10K+ reviews and “regret 70% fewer emotional reactions within 2 weeks” all appear in the flow. None of them is on the screen with the Redeem button, where the decision is made.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="offer">
+        <span class="no">05</span>
+        <span>
+          <h3>Offer Lifetime when they close</h3>
+          <p>The trial screen has a back arrow and no second chance. You already sell Lifetime at 129,99 € once, which is less than three years of the 54,99 € yearly plan. Show it once, to the people who leave without starting a trial.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>ARPU +10–15%</b><span>second chance</span></span>
+      </button>
+    </div>
+
+    <div class="band">
+      <div class="txt">
+        <div class="lab">Potential outcome</div>
+        <p>Run together, these five change what happens around the price: fewer stops on the way to it, a price screen that speaks to the person reading it, and a second chance for anyone who says no.</p>
+      </div>
+      <div class="nums">
+        <div><b>+25%</b><span>CR to purchase</span></div>
+        <div><b>+30%</b><span>ARPU</span></div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <div class="qr"><img src="img/qr.svg?v=1" alt="QR code for the prototype"><span><b>Or open it on your phone</b>Scan to try the flow in your hand.</span></div>
+      <button class="bigbtn" data-view="proto">Open the prototype
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="wrap">
+    Impact ranges are Adapty's expected effect from teardowns and A/B tests across subscription apps — not measured lift for Ahead. Every price, award, rating, quote and journey figure here and in the prototype comes from Ahead's own App Store listing, website and in-app screens.
+  </div>
+</div>
+</div><!-- /view-over -->
+
+<!-- ======================= PROTOTYPE ======================= -->
+<div class="view" id="view-proto">
+<div class="stage">
+  <div class="phonecol">
+    <div class="tools" id="tools">
+      <div class="seg" id="segTheme"><button data-theme="light">Light</button><button data-theme="dark" class="on">Dark</button></div>
+      <button class="demo-btn" id="demoBtn"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>30-sec walkthrough</button>
+    </div>
+    <div class="phone">
+      <div class="phone-in" id="phoneIn">
+        <div class="island"></div>
+        <div class="sbar light" id="sbar">
+          <span>9:41</span>
+          <span class="glyphs">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7.5" width="3" height="3.5" rx="1"/><rect x="4.5" y="5.5" width="3" height="5.5" rx="1"/><rect x="9" y="3" width="3" height="8" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><path d="M8 10.5 5.6 7.9a3.4 3.4 0 0 1 4.8 0L8 10.5Zm0-5.6a6.4 6.4 0 0 0-4.5 1.9L1.7 4.9a9 9 0 0 1 12.6 0l-1.8 1.9A6.4 6.4 0 0 0 8 4.9Z"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="20" height="10.8" rx="3" stroke="currentColor" stroke-opacity=".5"/><rect x="2.2" y="2.2" width="16.5" height="7.6" rx="1.8" fill="currentColor"/><path d="M22.3 4.1v3.8a2 2 0 0 0 0-3.8Z" fill="currentColor" fill-opacity=".5"/></svg>
+          </span>
+        </div>
+        <div class="homebar light" id="homebar"></div>
+        <div class="finger" id="finger"></div>
+        <div class="screenwrap">
+
+<!-- WELCOME -->
+<section class="scr" data-id="welcome">
+  <div class="scr-top"></div>
+  <div class="scr-body">
+    <img class="ah-rocket" src="img/rocket.png" alt="" style="margin-top:46px">
+    <img class="ah-word" id="wordmark" src="img/logo-white.svg" alt="ahead">
+    <p class="ah-tag">Control your emotions, control your life</p>
+  </div>
+  <div class="scr-foot">
+    <button class="ah-btn" data-go="goal">Get started</button>
+    <button class="ah-btn soft" data-go="goal">I already have an account</button>
+    <p class="ah-legal">By continuing, you agree to Ahead’s<br><u>Terms of Service</u> and <u>Privacy Policy</u></p>
+  </div>
+</section>
+
+<!-- GOAL -->
+<section class="scr" data-id="goal">
+  <div class="scr-top">
+    <div class="ah-prog"><i style="width:12%"></i></div>
+    <div class="ah-nav"><button class="ah-back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+    <h2 class="ah-h">What do you most hope to<br>improve with this app?</h2>
+  </div>
+  <div class="scr-body"><div class="ah-rows" id="goalList"></div></div>
+  <div class="scr-foot"><button class="ah-fab" id="goalBtn" data-go="q1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+</section>
+
+<!-- Q1 — their bar slider -->
+<section class="scr" data-id="q1">
+  <div class="scr-top">
+    <div class="ah-prog"><i style="width:22%"></i></div>
+    <div class="ah-nav"><button class="ah-back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><span class="ah-count">Question 1 of 10</span></div>
+  </div>
+  <div class="scr-body">
+    <div class="ah-ask"><img src="img/ghost-book.png" alt=""><div class="ah-bub">How do you typically<br>behave in arguments?</div></div>
+    <div class="ah-bars" id="bars"></div>
+    <input class="ah-range" id="slider" type="range" min="0" max="6" step="1" value="4" aria-label="How do you typically behave in arguments?">
+    <div class="ah-ends"><span>I get hot like a jalapeño!</span><span>I stay cool as<br>a cucumber.</span></div>
+  </div>
+  <div class="scr-foot"><button class="ah-fab" data-go="time" id="q1Btn" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+</section>
+
+<!-- DAILY TIME -->
+<section class="scr" data-id="time">
+  <div class="scr-top">
+    <div class="ah-nav"><button class="ah-back" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+    <h2 class="ah-h c" style="margin-top:10px">How much time do you want<br>to invest daily to reach your<br>goal?</h2>
+  </div>
+  <div class="scr-body">
+    <div class="ah-tbl" id="timeList"></div>
+    <div class="ah-hint"><img src="img/ghost-flame.png" alt=""><div class="ah-bub">You’ll be 4x more likely to complete the course with a clear goal!</div></div>
+  </div>
+  <div class="scr-foot"><button class="ah-btn" data-go="loader" id="timeBtn">Continue</button></div>
+</section>
+
+<!-- LOADER -->
+<section class="scr" data-id="loader">
+  <div class="scr-top"></div>
+  <div class="scr-body">
+    <div class="ah-lwrap">
+      <img src="img/ghost-hourglass.png" alt="">
+      <h2 class="ah-load-h">Analyzing your answers...</h2>
+      <div class="ah-lrows" id="lrows">
+        <div class="ah-lr"><div><span>Profile</span><span class="p">0%</span></div><div class="tr"><i></i></div></div>
+        <div class="ah-lr"><div><span>Goals</span><span class="p">0%</span></div><div class="tr"><i></i></div></div>
+        <div class="ah-lr"><div><span>Personalization</span><span class="p">0%</span></div><div class="tr"><i></i></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scr-foot"></div>
+</section>
+
+<!-- PROFILE -->
+<section class="scr" data-id="profile">
+  <div class="scr-top"><h2 class="ah-h c" style="margin-top:12px">Your emotional profile</h2></div>
+  <div class="scr-body">
+    <svg class="ah-radar" id="radar" viewBox="0 0 350 250"></svg>
+    <div class="ah-hl"><img src="img/ghost-book.png" alt=""><div class="ah-bub">Here are your highlights:</div></div>
+    <div class="ah-card"><div class="k"><em>Superpower</em><b><span id="spName"></span><i id="spPct"></i></b></div><p id="spTxt"></p></div>
+    <div class="ah-card"><div class="k"><em>Growth area</em><b><span id="gaName"></span><i class="r" id="gaPct"></i></b></div><p id="gaTxt"></p></div>
+    <div style="height:6px"></div>
+  </div>
+  <div class="scr-foot"><button class="ah-btn" data-go="journeys">Continue</button></div>
+</section>
+
+<!-- JOURNEYS -->
+<section class="scr" data-id="journeys">
+  <div class="scr-top">
+    <h2 class="ah-h c" style="margin-top:12px">Pick your journeys</h2>
+    <p class="ah-sub" style="text-align:center;color:var(--ah-txt)">Based on your result, here are journeys<br>we recommend.</p>
+  </div>
+  <div class="scr-body">
+    <div class="ah-slots" id="slots"></div>
+    <div class="ah-jgrid" id="jgrid"></div>
+    <div style="height:8px"></div>
+  </div>
+  <div class="scr-foot"><button class="ah-btn" data-go="paywall" id="jBtn">Continue</button></div>
+</section>
+
+<!-- PAYWALL -->
+<section class="scr scr--pay" data-id="paywall" data-light="1">
+  <div class="scr-top">
+    <button class="ah-back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="ah-x" id="payClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="scr-body">
+    <img class="ah-peek" src="img/ghost-peek.png" alt="">
+    <h2 class="ah-payh" id="payH"></h2>
+    <p class="ah-paysub" id="paySub"></p>
+    <img class="ah-ada" src="img/ada.png" alt="Apple Design Award Finalist 2024 Social Impact · five stars · 10K+ reviews">
+    <p class="ah-seventy">Ahead members regret <b>70% fewer emotional reactions</b> within 2 weeks</p>
+    <div class="ah-tl" id="tl"></div>
+    <div class="ah-trials">
+      <button class="ah-trial" data-v="7"><span class="tk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><b>Try for 7 days</b><span>Free</span></button>
+      <button class="ah-trial" data-v="30"><span class="tk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><b>Try for 30 days</b><span>4,99 €</span></button>
+    </div>
+    <div style="height:4px"></div>
+  </div>
+  <div class="scr-foot">
+    <button class="ah-allp">View all plans</button>
+    <button class="ah-btn white" id="payCta"></button>
+    <p class="ah-fine" id="payFine"></p>
+    <div class="ah-rest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restore purchases</div>
+  </div>
+</section>
+
+<!-- OFFER ON CLOSE — Lifetime, direct purchase -->
+<section class="scr sheet scr--offer" data-id="offer">
+  <div class="scr-top">
+    <button class="ah-x" id="offClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2 class="ah-oh">Not one for trials?<br>Keep Ahead for good.</h2>
+    <p class="ah-os">One payment. No subscription, no renewals.</p>
+  </div>
+  <div class="scr-body">
+    <div class="ah-cmp">
+      <div class="h"></div><div class="h v">Yearly</div><div class="h v lt">Lifetime<span class="ah-mp">ONE TIME PAYMENT</span></div>
+      <div class="l">Price</div><div class="v">54,99 €<br>per year</div><div class="v lt">129,99 €<br>once</div>
+      <div class="l">Over 3 years</div><div class="v">164,97 €</div><div class="v lt">129,99 €</div>
+      <div class="l">Renews</div><div class="v">Every year</div><div class="v lt">Never</div>
+      <div class="l">Every journey</div><div class="v"><svg class="ah-ck" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div><div class="v lt end"><svg class="ah-ck" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <i class="ah-lifeframe"></i>
+    </div>
+    <div style="text-align:center"><span class="ah-save">Pay once · yours to keep</span></div>
+  </div>
+  <div class="scr-foot">
+    <button class="ah-btn" id="offerCta" style="height:52px;font-size:16px">Purchase Lifetime Offer</button>
+    <p class="ah-fine">One time payment of 129,99 €. No subscription.</p>
+    <div class="ah-rest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restore purchases</div>
+  </div>
+</section>
+
+<!-- SIGN-UP, now after purchase -->
+<section class="scr scr--acct" data-id="account">
+  <div class="scr-top"></div>
+  <div class="scr-body dock">
+    <img class="ah-rocket" src="img/rocket.png" alt="">
+    <img class="ah-word" src="img/logo-white.svg" alt="ahead" style="opacity:.5" id="wordmark2">
+  </div>
+  <div class="scr-foot">
+    <div class="ah-sheet">
+      <h3>Sign up</h3>
+      <p>Save your profile and journeys on every device.</p>
+      <button class="ah-sso" data-go="remind"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.6c2-1.9 3.3-4.7 3.3-8Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.6-2.8c-1 .7-2.2 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.8 14.1a6.6 6.6 0 0 1 0-4.2V7.1H2.1a11 11 0 0 0 0 9.8l3.7-2.8Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.2-3.2A11 11 0 0 0 2.1 7.1l3.7 2.8C6.7 7.3 9.1 5.4 12 5.4Z"/></svg>Continue with Google</button>
+      <button class="ah-sso" data-go="remind"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9a4.8 4.8 0 0 0-3.8-2c-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9a5 5 0 0 0-4.2 2.6c-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.6 1.3-.1 1.7-.8 3.3-.8 1.5 0 1.9.8 3.3.8 1.4 0 2.2-1.3 3-2.5a10 10 0 0 0 1.4-2.8c-.1 0-2.6-1-2.6-4ZM14 5.1c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4Z"/></svg>Continue with Apple</button>
+      <button class="ah-sso plain" data-go="remind">Sign up with Email</button>
+    </div>
+  </div>
+</section>
+
+<!-- REMINDERS, now after purchase -->
+<section class="scr scr--rem" data-id="remind" data-light="1">
+  <div class="scr-top"><div class="ah-prog" style="background:rgba(255,255,255,.2)"><i style="width:100%;background:#fff"></i></div></div>
+  <div class="scr-body dock">
+    <h2 class="ah-h">Want to remind your future self<br>to keep going?</h2>
+    <p class="ah-sub" id="remSub"></p>
+    <img class="ah-hill" src="img/flag-hill.png" alt="">
+  </div>
+  <div class="scr-foot">
+    <p>*We’ll only send you 1 notification per day</p>
+    <button class="ah-btn" data-go="welcome">Help me reach my goal</button>
+    <button class="ah-not" data-go="welcome">Not now</button>
+  </div>
+</section>
+
+        </div>
+      </div>
+    </div>
+    <div class="demo-cap hidden" id="demoCap"><div class="bar"><i id="demoProg"></i></div><p id="demoTxt"></p><button id="demoStop">Stop</button></div>
+    <div class="chips" id="chips"></div>
+    <p class="chiphint">Jump to any screen — answers already filled in.</p>
+    <div class="qr"><img src="img/qr.svg?v=1" alt="QR code for this prototype"><span><b>Open it on your phone</b>Scan to try the flow in your hand.</span></div>
+  </div>
+  <div class="panelcol"><div class="pn" id="panel"></div></div>
+</div>
+</div><!-- /view-proto -->
+
+<script>
+/* ================= their content ================= */
+var GOALS = [
+  {k:'career',  e:'⛳️', l:'My career/performance',            h:'Grow at work with Ahead!'},
+  {k:'romance', e:'💖', l:'My romantic relationship',          h:'Build a calmer relationship with Ahead!'},
+  {k:'child',   e:'👶', l:'My relationship with my child(ren)', h:'Become a better parent with Ahead!'},
+  {k:'friends', e:'👫', l:'My friendships/family relations',   h:'Get closer to friends and family with Ahead!'},
+  {k:'peace',   e:'💡', l:'My peace of mind',                  h:'Find your peace of mind with Ahead!'},
+  {k:'else',    e:'✏️', l:'Something else',                    h:'Control your emotions, control your life'}
+];
+var GOAL = {}; GOALS.forEach(function(g){ GOAL[g.k]=g; });
+var TIMES = [['3-5min','Small steps','3–5 min'],['5-10min','Strong start','5–10 min'],['10-15min','Clearly committed','10–15 min'],['>15min','Unstoppable','15+ min']];
+var JOURNEYS = [
+  {k:'positivity',      n:'Positivity',      m:'83% match', l:'1.189M learners', img:'img/j-positivity.png',      bg:'#C5D3FF'},
+  {k:'procrastination', n:'Procrastination', m:'79% match', l:'1.424M learners', img:'img/j-procrastination.png', bg:'#C6EEFF'},
+  {k:'heartbreak',      n:'Heartbreak',      m:'50% match', l:'1.289M learners', img:'img/j-heartbreak.png',      bg:'#FFD3D0'},
+  {k:'confidence',      n:'Confidence',      m:'71% match', l:'1.278M learners', img:'img/j-confidence.png',      bg:'#FFE07F'}
+];
+var JOUR = {}; JOURNEYS.forEach(function(j){ JOUR[j.k]=j; });
+var BARH = [112,80,52,36,52,80,112];
+
+/* ================= state ================= */
+function defaults(){ return { theme:S0.theme, goal:'child', calm:4, time:1, journeys:['positivity'], trial:'7' }; }
+var S0 = {theme:'dark'};
+var S = defaults();
+
+/* the profile — Composure follows the slider; the rest are their published example */
+function scores(){ return [
+  {k:'Composure',    v:34+S.calm*8, t:'Arguments heating up? You’re the one who stays cool as a cucumber.'},
+  {k:'Confidence',   v:58},
+  {k:'Tranquility',  v:66, t:'Mind in overdrive? You’re the one hitting the brakes.'},
+  {k:'Productivity', v:41},
+  {k:'Positivity',   v:33, t:'That cup is half full? You wonder about the other half.'}
+]; }
+function radar(){
+  var sc=scores(), cx=175, cy=130, R=86, h='', pts=[];
+  function P(i,r){ var a=-Math.PI/2+i*2*Math.PI/5; return [cx+r*Math.cos(a), cy+r*Math.sin(a)]; }
+  [1,.66,.33].forEach(function(f){ h+='<polygon class="ring" points="'+[0,1,2,3,4].map(function(i){ return P(i,R*f).join(','); }).join(' ')+'"'+(f<1?' style="stroke-opacity:.18"':'')+'/>'; });
+  [0,1,2,3,4].forEach(function(i){ var p=P(i,R); h+='<line class="spoke" x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'"/>'; });
+  sc.forEach(function(s,i){ pts.push(P(i,R*s.v/100).join(',')); });
+  h+='<polygon points="'+pts.join(' ')+'" fill="#7A5FEC" fill-opacity=".9" stroke="#8F76F3"/>';
+  var LP=[[175,22,'middle'],[300,88,'end'],[262,228,'middle'],[88,228,'middle'],[50,88,'start']];
+  sc.forEach(function(s,i){ var l=LP[i]; h+='<text x="'+l[0]+'" y="'+l[1]+'" text-anchor="'+l[2]+'">'+s.k+'</text><text x="'+l[0]+'" y="'+(l[1]+13)+'" text-anchor="'+l[2]+'" style="opacity:.75">'+s.v.toFixed(1)+'%</text>'; });
+  if(LP){ var t=h.split('x="300"').join('x="318"').split('x="50"').join('x="32"'); h=t; }
+  document.getElementById('radar').innerHTML=h;
+}
+
+/* ================= builders ================= */
+function buildGoals(){ var g=document.getElementById('goalList'); g.innerHTML='';
+  GOALS.forEach(function(o){ var b=document.createElement('button'); b.className='ah-row'; b.dataset.v=o.k;
+    b.innerHTML='<span class="e">'+o.e+'</span><span>'+o.l+'</span>';
+    b.addEventListener('click',function(){ S.goal=o.k; syncScreen(); }); g.appendChild(b); }); }
+function buildTimes(){ var g=document.getElementById('timeList'); g.innerHTML='';
+  TIMES.forEach(function(o,i){ var b=document.createElement('button'); b.className='ah-tr'; b.dataset.v=i;
+    b.innerHTML=o[0]+'<span>'+o[1]+'</span>'; b.addEventListener('click',function(){ S.time=i; syncScreen(); }); g.appendChild(b); }); }
+function buildBars(){ document.getElementById('bars').innerHTML=BARH.map(function(h){ return '<i style="height:'+h+'px"></i>'; }).join(''); }
+function buildJourneys(){ var g=document.getElementById('jgrid'); g.innerHTML='';
+  JOURNEYS.forEach(function(j){ var d=document.createElement('div'); d.className='ah-j'; d.dataset.v=j.k; d.style.background=j.bg;
+    d.innerHTML='<img src="'+j.img+'" alt=""><b>'+j.n+'</b><span>'+j.m+'<br>'+j.l+'</span><button>Add</button>';
+    d.querySelector('button').addEventListener('click',function(){ var i=S.journeys.indexOf(j.k);
+      if(i>-1) S.journeys.splice(i,1); else if(S.journeys.length<3) S.journeys.push(j.k); syncScreen(); });
+    g.appendChild(d); }); }
+var slider=document.getElementById('slider');
+slider.addEventListener('input',function(){ S.calm=+slider.value; syncScreen(); });
+
+var LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>';
+var BELL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>';
+var STAR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg>';
+
+/* ================= everything downstream reads S ================= */
+function syncScreen(){
+  document.querySelectorAll('#goalList .ah-row').forEach(function(b){ b.classList.toggle('on', b.dataset.v===S.goal); });
+  document.querySelectorAll('#bars i').forEach(function(b,i){ b.classList.toggle('on', i===S.calm); });
+  slider.value=S.calm;
+  document.querySelectorAll('#timeList .ah-tr').forEach(function(b){ b.classList.toggle('on', +b.dataset.v===S.time); });
+
+  /* profile */
+  radar();
+  var sc=scores(), sp=sc[0].v>66 ? sc[0] : sc[2], ga=sc[4];
+  document.getElementById('spName').textContent=sp.k; document.getElementById('spPct').textContent=Math.round(sp.v)+'%';
+  document.getElementById('spTxt').textContent=sp.t;
+  document.getElementById('gaName').textContent=ga.k; document.getElementById('gaPct').textContent=ga.v+'%';
+  document.getElementById('gaTxt').textContent=ga.t;
+
+  /* journeys */
+  document.querySelectorAll('#jgrid .ah-j').forEach(function(d){ var on=S.journeys.indexOf(d.dataset.v)>-1;
+    d.classList.toggle('on',on); d.querySelector('button').textContent=on?'Added':'Add'; });
+  var sl='', names=['1st journey','2nd journey','3rd journey'];
+  for(var i=0;i<3;i++){ var j=JOUR[S.journeys[i]];
+    sl+='<div class="ah-slot"><div>'+(j?'<img src="'+j.img+'" alt="">':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>')+'</div>'+(j?j.n:names[i])+'</div>'; }
+  document.getElementById('slots').innerHTML=sl;
+  document.getElementById('jBtn').disabled=!S.journeys.length;
+
+  /* paywall: their goal headline, their journey, their minutes */
+  document.getElementById('payH').textContent=GOAL[S.goal].h;
+  var jn=S.journeys.map(function(k){ return JOUR[k].n; });
+  var jtxt=jn.length ? (jn.length===1 ? 'Your <b>'+jn[0]+'</b> journey' : 'Your <b>'+jn.slice(0,-1).join(', ')+' + '+jn[jn.length-1]+'</b> journeys') : 'Your journeys';
+  document.getElementById('paySub').innerHTML=jtxt+' · <b>'+TIMES[S.time][2]+'</b> a day';
+  var t30=S.trial==='30';
+  document.getElementById('tl').innerHTML=
+    '<div class="ah-st"><span class="ic">'+LOCK+'</span><div><b>Today: Instant access ✓</b><span>'+(t30?'With paid 30-day trial':'With free 7-day trial')+'</span></div></div>'+
+    '<div class="ah-st"><span class="ic">'+BELL+'</span><div><b>'+(t30?'Day 28':'Day 5')+': Trial reminder</b><span>We notify you about your trial end via email</span></div></div>'+
+    '<div class="ah-st"><span class="ic">'+STAR+'</span><div><b>'+(t30?'Day 30':'Day 7')+': Full membership</b><span>Your account is charged, cancel anytime in the 24h before</span></div></div>';
+  document.querySelectorAll('.ah-trial').forEach(function(b){ b.classList.toggle('on', b.dataset.v===S.trial); });
+  document.getElementById('payCta').textContent = t30 ? 'Redeem 30 days for 4,99 €' : 'Redeem 7 days for 0,00 €';
+  document.getElementById('payFine').innerHTML = t30
+    ? 'Access for 30 days, then 69,99 €/year (~5,83 €/mo).<br>Charged yearly 69,99 €. Cancel anytime.'
+    : 'Free access for 7 days, then 54,99 €/year (~4,58 €/mo).<br>Charged yearly 54,99 €. Cancel anytime.';
+  document.getElementById('remSub').textContent = jn.length ? 'One nudge a day to keep your '+jn[0]+' journey going.' : 'One nudge a day to keep your journey going.';
+}
+
+/* ================= router ================= */
+var ORDER=['welcome','goal','q1','time','loader','profile','journeys','paywall','offer','account','remind'];
+var LABEL={welcome:'Welcome',goal:'Goal',q1:'Question',time:'Daily time',loader:'Loader',profile:'Profile',journeys:'Journeys',paywall:'Paywall',offer:'Offer on close',account:'Sign-up',remind:'Reminders'};
+var scr={}, hist=[], cur='welcome', loadTimers=[];
+document.querySelectorAll('.scr').forEach(function(s){ scr[s.dataset.id]=s; });
+
+function chrome(){ var light=S.theme==='light', purple=!!scr[cur].dataset.light;
+  var lb = purple || !light; if(cur==='offer') lb=true;
+  document.getElementById('sbar').classList.toggle('light',lb);
+  document.getElementById('homebar').classList.toggle('light',(purple||!light) && cur!=='offer' && cur!=='remind');
+  var wm=light?'img/logo.svg':'img/logo-white.svg';
+  document.getElementById('wordmark').src=wm; document.getElementById('wordmark2').src=wm; }
+function enter(id){ chrome(); paintChips(); paintPanel(); clearLoad(); if(id==='loader') runLoader(); }
+function go(id,opts){
+  opts=opts||{}; if(id===cur) return;
+  var from=scr[cur], to=scr[id];
+  if(!opts.back) hist.push(cur);
+  if(id==='welcome'){ hist=[]; }
+  from.classList.remove('is-active');
+  if(!to.classList.contains('sheet') && !from.classList.contains('sheet')) from.classList.add('is-past');
+  if(to.classList.contains('sheet')) from.classList.add('is-active');
+  if(from.classList.contains('sheet')) scr.paywall.classList.remove('is-active'), scr.paywall.classList.add('is-past');
+  Object.keys(scr).forEach(function(k){ if(k!==id&&k!==cur&&!(to.classList.contains('sheet')&&k==='paywall')) scr[k].classList.remove('is-active'); });
+  if(id==='welcome') Object.keys(scr).forEach(function(k){ scr[k].classList.add('nofx'); scr[k].classList.remove('is-past','is-active'); requestAnimationFrame(function(){ requestAnimationFrame(function(){ scr[k].classList.remove('nofx'); }); }); });
+  to.classList.remove('is-past'); to.classList.add('is-active');
+  cur=id; enter(id);
+}
+function back(){
+  if(!hist.length) return;
+  var prev=hist.pop();
+  scr[cur].classList.remove('is-active');
+  scr[prev].classList.remove('is-past'); scr[prev].classList.add('is-active');
+  cur=prev; enter(prev);
+}
+function jump(id){
+  var i=ORDER.indexOf(id);
+  Object.keys(scr).forEach(function(k){ scr[k].classList.add('nofx'); scr[k].classList.remove('is-active','is-past'); });
+  hist=ORDER.slice(0,i<0?0:i);
+  if(id==='offer') hist=ORDER.slice(0,ORDER.indexOf('offer'));
+  if(id==='offer') scr.paywall.classList.add('is-active');
+  scr[id].classList.add('is-active'); cur=id;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    Object.keys(scr).forEach(function(k){ scr[k].classList.remove('nofx'); }); }); });
+  syncScreen(); enter(id);
+}
+var chipsBuilt=false;
+function paintChips(){
+  var c=document.getElementById('chips');
+  if(!chipsBuilt){ chipsBuilt=true;
+    ORDER.forEach(function(id){
+      var b=document.createElement('button'); b.className='chip'+(id==='offer'?' offer':''); b.textContent=LABEL[id];
+      b.dataset.id=id; b.onclick=function(){ stopDemo(); jump(id); }; c.appendChild(b);
+    });
+  }
+  c.querySelectorAll('.chip').forEach(function(b){ b.classList.toggle('on', b.dataset.id===cur); });
+}
+
+function clearLoad(){ loadTimers.forEach(clearTimeout); loadTimers=[]; }
+function runLoader(){
+  var k=demo.on?0.45:1, rows=document.querySelectorAll('#lrows .ah-lr');
+  rows.forEach(function(r){ r.querySelector('.p').textContent='0%'; r.querySelector('i').style.width='0'; });
+  rows.forEach(function(r,i){ for(var s=1;s<=10;s++){ (function(s){ loadTimers.push(setTimeout(function(){
+    r.querySelector('.p').textContent=(s*10)+'%'; r.querySelector('i').style.width=(s*10)+'%'; },(i*1300+s*120)*k)); })(s); } });
+  loadTimers.push(setTimeout(function(){ if(cur==='loader') go('profile'); },4300*k));
+}
+
+/* ================= wiring ================= */
+document.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ if(!b.disabled) go(b.dataset.go); }); });
+document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click',back); });
+document.querySelectorAll('.ah-trial').forEach(function(b){ b.addEventListener('click',function(){ S.trial=b.dataset.v; syncScreen(); }); });
+document.getElementById('payClose').addEventListener('click',function(){ go('offer'); });
+document.getElementById('payCta').addEventListener('click',function(){ go('account'); });
+document.getElementById('offClose').addEventListener('click',function(){ go('account'); });
+document.getElementById('offerCta').addEventListener('click',function(){ go('account'); });
+
+function setSeg(id,attr,val){ document.querySelectorAll('#'+id+' button').forEach(function(b){ b.classList.toggle('on', b.dataset[attr]===val); }); }
+function setTheme(th){ S.theme=th; S0.theme=th; document.getElementById('phoneIn').classList.toggle('light',th==='light'); setSeg('segTheme','theme',th); chrome(); }
+document.querySelectorAll('#segTheme button').forEach(function(b){ b.addEventListener('click',function(){ setTheme(b.dataset.theme); }); });
+
+/* ================= the 30-second walkthrough ================= */
+var demo={tok:0,on:false,t0:0,iv:null}, finger=document.getElementById('finger'), phoneIn=document.getElementById('phoneIn');
+function W(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
+function cap(txt){ document.getElementById('demoTxt').textContent=txt; }
+async function tap(sel,tok){
+  if(demo.tok!==tok) throw 0;
+  var el=document.querySelector(sel); if(!el) return;
+  var r=el.getBoundingClientRect(), p=phoneIn.getBoundingClientRect(), z=p.width/phoneIn.offsetWidth||1;
+  finger.style.left=((r.left-p.left+r.width/2)/z)+'px'; finger.style.top=((r.top-p.top+r.height/2)/z)+'px';
+  finger.classList.add('show'); await W(380); if(demo.tok!==tok) throw 0;
+  finger.classList.add('press'); await W(120); finger.classList.remove('press'); el.click(); await W(160);
+  if(demo.tok!==tok) throw 0;
+}
+async function pause(ms,tok){ await W(ms); if(demo.tok!==tok) throw 0; }
+function startDemo(){
+  stopDemo(); var tok=++demo.tok; demo.on=true; demo.t0=Date.now();
+  var keep=S.theme; S=defaults(); S.theme=keep; S.goal='peace'; S.calm=3; S.time=0; S.journeys=[];
+  jump('welcome');
+  document.getElementById('demoCap').classList.remove('hidden');
+  demo.iv=setInterval(function(){ document.getElementById('demoProg').style.width=Math.min(100,(Date.now()-demo.t0)/290)+'%'; },200);
+  (async function(){
+    try{
+      cap('Get started goes straight to the first question — no sign-up sheet.'); await pause(1300,tok);
+      await tap('[data-id=welcome] .ah-btn',tok);
+      cap('Your first question. Say: their relationship with their kids.'); await pause(600,tok);
+      await tap('#goalList [data-v=child]',tok); await pause(300,tok); await tap('#goalBtn',tok);
+      cap('Your bar slider, working. Cooler in arguments.'); await pause(600,tok);
+      var r=slider.getBoundingClientRect(), p=phoneIn.getBoundingClientRect(), z=p.width/phoneIn.offsetWidth||1;
+      finger.style.left=((r.left-p.left+r.width*0.5)/z)+'px'; finger.style.top=((r.top-p.top+r.height/2)/z)+'px'; finger.classList.add('show');
+      await pause(400,tok); finger.style.left=((r.left-p.left+r.width*0.83)/z)+'px';
+      S.calm=4; syncScreen(); await pause(250,tok); S.calm=5; syncScreen(); await pause(400,tok);
+      await tap('#q1Btn',tok);
+      cap('How long a day they will give it.'); await pause(500,tok);
+      await tap('#timeList [data-v="1"]',tok); await pause(300,tok); await tap('#timeBtn',tok);
+      cap('Your loader, as it ships.'); await pause(2200,tok);
+      cap('Their profile — Composure follows the slider.'); await pause(1500,tok);
+      await tap('[data-id=profile] .ah-btn',tok);
+      cap('They add a journey.'); await pause(500,tok);
+      await tap('#jgrid [data-v=positivity] button',tok); await pause(400,tok); await tap('#jBtn',tok);
+      cap('The price screen now opens on their goal, journey, minutes and your award.'); await pause(1900,tok);
+      await tap('.ah-trial[data-v="30"]',tok); await pause(600,tok); await tap('.ah-trial[data-v="7"]',tok); await pause(500,tok);
+      cap('They close it. One second chance: your own Lifetime plan.'); await tap('#payClose',tok); await pause(2300,tok);
+      cap('That is the flow. Sign-up and reminders now come after purchase — try the chips below.');
+      finger.classList.remove('show'); await pause(2200,tok); stopDemo();
+    }catch(e){}
+  })();
+}
+function stopDemo(){ if(!demo.on) return; demo.tok++; demo.on=false; clearInterval(demo.iv); finger.classList.remove('show','press');
+  document.getElementById('demoCap').classList.add('hidden'); }
+document.getElementById('demoBtn').addEventListener('click',startDemo);
+document.getElementById('demoStop').addEventListener('click',stopDemo);
+phoneIn.addEventListener('pointerdown',function(e){ if(e.isTrusted && demo.on) stopDemo(); });
+</script>
+<script>
+/* ---- the short panel: hypothesis + potential outcome, nothing else ---- */
+var PANEL = {
+welcome:{n:2,t:'Let them start before they sign up',
+ hyp:'Try sending Get started straight to the first question, <b>because today it opens a sign-up sheet — Google, Apple or email — before anyone has answered a thing</b>. The account moves to just after purchase.',
+ kept:'Your splash as it ships — the rocket ghost, the wordmark, “Control your emotions, control your life”, both buttons and the legal line.',
+ out:'CR +8% · ARPU +17%'},
+goal:{ctx:true,t:'What do you most hope to improve with this app?',
+ kept:'Your first question word for word, with your emoji rows. The answer heads the paywall — pick another one and the paywall headline changes with it.'},
+q1:{ctx:true,t:'How do you typically behave in arguments?',
+ kept:'Your bar slider as a working control — drag it and Composure moves on the profile. It stands in for all ten scenario questions, which stay exactly as they are, along with the age, gender and other profile questions.'},
+time:{ctx:true,t:'How much time do you want to invest daily?',
+ kept:'Your four rows and the 4x ghost, unchanged. The minutes they pick appear on the paywall.'},
+loader:{ctx:true,t:'Analyzing your answers',
+ kept:'Your loader as it ships — the hourglass ghost and the Profile, Goals and Personalization bars.'},
+profile:{ctx:true,t:'Your emotional profile',
+ kept:'Your radar and highlight cards. Composure follows the slider; the superpower and growth area are picked from the five scores. This is already a real payoff, so it stays where it is.'},
+journeys:{ctx:true,t:'Pick your journeys',
+ kept:'Your journey cards, match scores and learner counts as published. The journey they add is named on the paywall.'},
+paywall:{n:1,t:'Put their goal on the price screen',
+ hyp:'Try heading the price screen with their goal, their journey and their daily minutes, <b>because today “Become a better parent with Ahead!” sits two screens earlier and the screen with the price says “Design your trial” to everyone</b>. Go back and pick another goal — the headline follows.',
+ out:'CR +15–20%',
+ n2:4, hyp2:'Try your Apple Design Award, 10K+ reviews and the 70% line right above the trial, <b>because today they sit on earlier screens and none of them is next to the Redeem button</b>.',
+ out2:'CR +10–15%',
+ kept:'Your purple, the peeking ghost, the Today / Day 5 / Day 7 timeline, both trial cards, the white Redeem button, the billing line and Restore purchases. The X is new: it is how the offer is reached.'},
+offer:{n:5,t:'Offer Lifetime when they close',
+ hyp:'Try your own Lifetime plan as the one second chance, <b>because 129,99 € once is less than three years of the 54,99 € yearly plan — a real saving, with no invented discount</b>. It is a direct purchase with no trial, so it also shows how pay-once buyers compare with trial starters.',
+ kept:'Your plan sheet — the white card, the purple outline and tag, the green badge, and the “Purchase Lifetime Offer” button you already use.',
+ out:'ARPU +10–15%'},
+account:{n:2,t:'Let them start before they sign up',
+ hyp:'Try asking for the account here, <b>because now there is a profile, journeys and a purchase worth saving</b>, and nothing stands between Get started and the questions.',
+ kept:'Your sign-up sheet with Google, Apple and email, unchanged.',
+ out:'CR +8% · ARPU +17%'},
+remind:{n:3,t:'Ask for reminders, Health and the widget after',
+ hyp:'Try asking for reminders after purchase, <b>because today they come before the price together with the Mantra widget and Apple Health, and each prompt is a moment to stop</b>. The widget and Health follow this screen, each where it is first useful.',
+ kept:'Your flag on the hill, the copy, the one-a-day note and both buttons.',
+ out:'CR +10–15%'}
+};
+
+function outBlock(lab,val){
+  return '<div class="pn-out"><div class="lab">'+lab+'</div><div class="v">'+val+'</div></div>';
+}
+function paintPanel(){
+  var d=PANEL[cur]; if(!d) return;
+  var h='';
+  if(d.ctx){
+    h += '<div class="pn-n ctx">Context · no change proposed</div><h3 class="pn-t">'+d.t+'</h3>'
+       + '<div class="pn-kept">'+d.kept+'</div>';
+  } else {
+    h += '<div class="pn-n">Idea '+d.n+' of 5</div><h3 class="pn-t">'+d.t+'</h3>'
+       + '<p class="pn-hyp">'+d.hyp+'</p>'
+       + outBlock('Potential outcome · based on Adapty data', d.out);
+    if(d.hyp2){
+      h += '<div class="pn-sep"></div>'
+         + '<div class="pn-n">Idea '+d.n2+' of 5</div>'
+         + '<p class="pn-hyp" style="margin-top:12px">'+d.hyp2+'</p>'
+         + outBlock('Potential outcome · based on Adapty data', d.out2);
+    }
+    h += '<div class="pn-kept"><b>Your design, unchanged.</b> '+d.kept+'</div>';
+  }
+  if(S.theme==='light') h += '<div class="pn-kept"><b>Light mode.</b> Ahead ships dark; this light version is our approximation in your colours.</div>';
+  h += '<div class="pn-foot">Ranges are Adapty’s expected effect from tests across 30,000+ subscription apps — not measured lift for Ahead. '
+     + 'Prices, awards, ratings and journey figures come from your own published material.</div>';
+  document.getElementById('panel').innerHTML = h;
+}
+
+/* ---- views, jumps from the overview ---- */
+function showView(v){
+  if(v!=='proto') stopDemo();
+  document.querySelectorAll('.view').forEach(function(x){ x.classList.remove('on'); });
+  document.getElementById('view-'+v).classList.add('on');
+  document.querySelectorAll('.nav-links button[data-view]').forEach(function(b){ b.classList.toggle('on', b.dataset.view===v); });
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-view]').forEach(function(b){ b.addEventListener('click',function(){ showView(b.dataset.view); }); });
+document.querySelectorAll('.idea[data-jump]').forEach(function(b){
+  b.addEventListener('click',function(){ showView('proto'); jump(b.dataset.jump); });
+});
+document.querySelectorAll('[data-demo]').forEach(function(b){ b.addEventListener('click',function(){ showView('proto'); startDemo(); }); });
+document.getElementById('segTheme').addEventListener('click',function(){ paintPanel(); });
+
+buildGoals(); buildTimes(); buildBars(); buildJourneys();
+scr.welcome.classList.add('is-active');
+syncScreen(); chrome(); paintChips(); paintPanel();
+if(/[?&]open=proto/.test(location.search)) showView('proto');
+</script>
+</body>
+</html>
